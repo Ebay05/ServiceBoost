@@ -1,0 +1,67 @@
+@import 'primeicons/primeicons.css';
+@import 'primeflex/primeflex.css';
+
+$primary: #094af0;
+$text1: #000;
+$text2: #0000008e;
+$text3: #696c82;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+}
+
+main {
+  padding: 1rem 2rem;
+}
+
+// TYPOGRAPHY
+h2 {
+  font-size: 2.25rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.text-1 {
+  color: $text1;
+}
+
+.text-2 {
+  color: $text2;
+}
+
+.text-3 {
+  color: $text3;
+}
+
+// ICONS
+.circle {
+  padding: 4px;
+  border-radius: 50px;
+  background-color: rgba($primary, 0.2);
+  color: $primary;
+}
+
+.text-green {
+  color: #11c9c3;
+}
+
+.text-orange {
+  color: #f2a03f;
+}
+
+.text-red {
+  color: #d44b45;
+}
+
+// DIVIDER
+.divider {
+  border: 1px solid $text3;
+}

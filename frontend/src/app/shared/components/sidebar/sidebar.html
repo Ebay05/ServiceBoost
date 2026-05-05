@@ -1,0 +1,17 @@
+<div class="flex h-full">
+  <aside class="w-2">
+    <img src="assets/svg/service-boost-logo-twoline.svg" alt="Logo firmy" class="h-4rem" />
+    <div class="user-box flex justify-content-center">
+      <img src="'assets/images/' + user.avatar" alt="Zdjęcie użytkownika" />
+      <div class="flex flex-column">
+        <span>{{ user.firstname }} {{ user.lastname }}</span>
+        <p>{{ user.role }}</p>
+      </div>
+    </div>
+    <p-panelMenu [model]="items"></p-panelMenu>
+  </aside>
+
+  <main class="w-10">
+    <router-outlet></router-outlet>
+  </main>
+</div>

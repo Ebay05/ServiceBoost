@@ -1,0 +1,55 @@
+<main>
+  <div class="header">
+    <h5><i class="pi pi-home h-4rem"></i> / Dashboard</h5>
+  </div>
+
+  <div class="stats flex gap-6">
+    <!-- DASHBOARD -->
+    <div class="charts w-9">
+      <h2 class="mb-3">Dashboard</h2>
+      <div class="flex gap-3">
+        <!-- MONTHLY INCOME -->
+        <div class="monthly-income flex align-items-center gap-3">
+          <div class="circle h-2rem w-2rem text-center vertical-align-middle">
+            <i class="pi pi-dollar h-2rem w-2rem font-semibold"></i>
+          </div>
+          <div class="flex flex-column gap-2">
+            <span class="text-lg font-semibold text-3 uppercase">Przychód miesięczny</span>
+            <span class="text-4xl font-bold text-1">32620 PLN</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- AMOUNT OF ORDERS -->
+        <div>
+          <span class="text-lg text-2 font-semibold block mb-2">{{ totalOrders }} zleceń</span>
+          <div class="flex flex-wrap gap-3">
+            <span class="text-2 text-lg font-medium">
+              <i class="pi pi-circle-fill text-green"></i>
+              przyjęte:
+              {{ orders.accepted }}
+            </span>
+
+            <span class="text-2 text-lg font-medium">
+              <i class="pi pi-circle-fill text-orange"></i>
+              w realizacji:
+              {{ orders.ongoing }}
+            </span>
+
+            <span class="text-2 text-lg font-medium">
+              <i class="pi pi-circle-fill text-red"></i>
+              opóźnione:
+              {{ orders.delayed }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  CALENDAR -->
+    <div class="calendar w-3">
+      <h3>Terminarz</h3>
+    </div>
+  </div>
+</main>

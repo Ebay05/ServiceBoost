@@ -1,0 +1,6 @@
+@ServiceBoost.API_HostAddress = http://localhost:5245
+
+GET {{ServiceBoost.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
