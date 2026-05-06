@@ -1,13 +1,24 @@
 <div class="flex h-full">
-  <aside class="w-2">
-    <img src="assets/svg/service-boost-logo-twoline.svg" alt="Logo firmy" class="h-4rem" />
-    <div class="user-box flex justify-content-center">
-      <img src="'assets/images/' + user.avatar" alt="Zdjęcie użytkownika" />
+  <aside class="w-2 p-3 gap-6">
+    <!-- LOGO -->
+    <img src="assets/svg/service-boost-logo-twoline.svg" alt="Logo firmy" class="h-3rem" />
+
+    <!-- USER CARD -->
+    <div
+      class="user-box flex align-items-center gap-3 my-3 border-1 border-solid border-200 border-round-lg p-2"
+    >
+      <img
+        [src]="'assets/images/' + user.avatar"
+        alt="Zdjęcie użytkownika"
+        class="h-3rem border-round-3xl"
+      />
       <div class="flex flex-column">
-        <span>{{ user.firstname }} {{ user.lastname }}</span>
-        <p>{{ user.role }}</p>
+        <span class="font-bold">{{ user.firstname }} {{ user.lastname }}</span>
+        <p class="text-sm">{{ user.role }}</p>
       </div>
     </div>
+
+    <!-- MENU ITEMS -->
     <p-panelMenu [model]="items"></p-panelMenu>
   </aside>
 

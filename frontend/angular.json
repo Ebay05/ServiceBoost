@@ -23,12 +23,7 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+            "assets": ["src/assets", "src/favicon.ico"],
             "styles": ["src/styles.scss", "node_modules/angular-calendar/css/angular-calendar.css"],
             "baseHref": "/app/",
             "deployUrl": "/app/"
