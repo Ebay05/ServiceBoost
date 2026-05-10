@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ServiceBoost.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5001c66c867586ad5a337543da1d30a84d9f2eb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae1f84a9ab3b5f7a5ff224afc135f80ce4abf4d2")]
 [assembly: System.Reflection.AssemblyProductAttribute("ServiceBoost.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ServiceBoost.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

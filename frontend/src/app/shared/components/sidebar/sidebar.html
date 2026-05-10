@@ -1,11 +1,11 @@
-<div class="flex h-full">
+<div class="flex h-full" style="background-color: #000">
   <aside class="w-2 p-3 gap-6">
     <!-- LOGO -->
-    <img src="assets/svg/service-boost-logo-twoline.svg" alt="Logo firmy" class="h-3rem" />
+    <img src="assets/svg/service-boost-logo-twoline-white.svg" alt="Logo firmy" class="w-9 p-3" />
 
     <!-- USER CARD -->
     <div
-      class="user-box flex align-items-center gap-3 my-3 border-1 border-solid border-200 border-round-lg p-2"
+      class="user-box flex align-items-center gap-3 my-3 bg-white-alpha-20 border-round-lg p-2 wtext-1"
     >
       <img
         [src]="'assets/images/' + user.avatar"
@@ -22,7 +22,9 @@
     <p-panelMenu [model]="items"></p-panelMenu>
   </aside>
 
-  <main class="w-10">
-    <router-outlet></router-outlet>
+  <main class="w-10 p-3">
+    <div class="h-full overflow-y-auto bg-white border-round-2xl">
+      <router-outlet></router-outlet>
+    </div>
   </main>
 </div>

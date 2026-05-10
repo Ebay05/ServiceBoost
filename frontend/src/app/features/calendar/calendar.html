@@ -1,78 +1,152 @@
-<main class="flex gap-6 h-screen">
-  <div class="left w-3 border-1 border-solid border-round-2xl p-3 border-300">
-    <h3 class="mb-3">Najbliższe wydarzenia</h3>
-    <div class="flex flex-column gap-3">
-      <h4>Dzisiaj</h4>
-      @if (events) {
-        @for (event of myEvents; track $index) {
-          @if (event.type == 'work') {
-            <div class="w-full flex align-items-center gap-2">
-              <i class="pi pi-circle-fill text-xs text-blue-500"></i>
-              <div class="w-full flex justify-content-between">
-                <p>{{ event.vehicle }}</p>
-                <p>{{ event.hour }}</p>
-              </div>
-            </div>
-          } @else if (event.type == 'birthday') {
-            <div class="w-full flex align-items-center gap-2">
-              <i class="pi pi-circle-fill text-xs text-red-500"></i>
-              <div class="w-full flex justify-content-between">
-                <p>{{ event.description }}</p>
-                <p>{{ event.age }} lata</p>
-              </div>
-            </div>
-          }
-        }
-      }
+<main class="flex h-full flex flex-column overflow-hidden">
+  <div class="bg-white flex-0 py-3 px-5">
+    <!-- HEADER -->
+    <div class="flex align-items-center justify-content-between gap-3 w-full">
+      <h3 class="text-3xl font-medium capitalize" style="width: 30%">
+        {{ viewDate | calendarDate: view + 'ViewTitle' : 'pl' }}
+      </h3>
+
+      <div class="flex justify-content-center" style="width: 40%">
+        <p-selectButton
+          [options]="viewOptions"
+          [(ngModel)]="view"
+          optionLabel="label"
+          optionValue="value"
+          (onChange)="setView(view)"
+          placeholder="Wybierz widok"
+          styleClass="w-full"
+        ></p-selectButton>
+      </div>
+
+      <div class="flex justify-content-end" style="width: 30%">
+        <p-button><i class="pi pi-plus"></i>Dodaj Zlecenie</p-button>
+      </div>
     </div>
+    <!-- @if (view == CalendarView.Month) {
+      <div class="w-full flex align-items-center mt-5 text-center">
+        @for (day of weekdays; track $index) {
+          <p class="py-1 flex-1 px-3 font-medium" [class.active-weekday]="$index === activeWeekday">
+            {{ day | titlecase }}
+          </p>
+        }
+      </div>
+    } -->
   </div>
 
-  <div class="w-9">
-    <div class="w-full flex align-items-center justify-content-between">
-      <h3>{{ viewDate | calendarDate: view + 'ViewTitle' : 'en' }}</h3>
+  <div class="flex flex-column overflow-y-auto flex-1 content-box py-3 px-5">
+    <!-- LEFT SIDE - EVENTS
+    <div class="left w-3 p-3">
+      <h3 class="mb-3">Najbliższe wydarzenia</h3>
+      <div class="flex flex-column gap-3">
+        <h4>Dzisiaj</h4>
+        @if (events) {
+          @for (event of myEvents; track $index) {
+            @if (event.type == 'work') {
+              <div class="w-full flex align-items-center gap-2">
+                <i class="pi pi-circle-fill text-xs text-blue-500"></i>
+                <div class="w-full flex justify-content-between">
+                  <p>{{ event.vehicle }}</p>
+                  <p>{{ event.hour }}</p>
+                </div>
+              </div>
+            } @else if (event.type == 'birthday') {
+              <div class="w-full flex align-items-center gap-2">
+                <i class="pi pi-circle-fill text-xs text-red-500"></i>
+                <div class="w-full flex justify-content-between">
+                  <p>{{ event.description }}</p>
+                  <p>{{ event.age }} lata</p>
+                </div>
+              </div>
+            }
+          }
+        }
+      </div>
+    </div> -->
 
-      <p-selectButton
-        [options]="viewOptions"
-        [(ngModel)]="view"
-        optionLabel="label"
-        optionValue="value"
-        (onChange)="setView(view)"
-        placeholder="Wybierz widok"
-        styleClass="w-full"
-      ></p-selectButton>
-    </div>
-
-    @switch (view) {
-      @case (CalendarView.Month) {
-        <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" />
+    <!-- RIGHT SIDE - CALENDAR -->
+    <div class="flex w-full h-full justify-content-center flex align-items-center flex-column">
+      @switch (view) {
+        @case (CalendarView.Month) {
+          <div class="flex">
+            <p-button
+              severity="secondary"
+              mwlCalendarPreviousView
+              class="h-full flex flex-grow-0 justify-content-center"
+              [view]="view"
+              [text]="true"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              <i class="pi pi-arrow-left"></i>
+            </p-button>
+            <mwl-calendar-month-view
+              [viewDate]="viewDate"
+              [events]="events"
+              [weekStartsOn]="1"
+              [cellTemplate]="cellTemplate"
+              (eventTimesChanged)="eventTimesChanged($event)"
+              class="flex-grow-1 w-full h-full px-3"
+            >
+              <ng-template #cellTemplate let-day="day">
+                <div
+                  class="flex-grow-1"
+                  [class.disabled-month]="!day.inMonth"
+                  [class.weekend-cell-style]="day.isWeekend"
+                >
+                  <div class="cal-cell-top">
+                    <span class="cal-day-number">
+                      {{ formatDay(day.date) }}
+                    </span>
+                  </div>
+                </div>
+              </ng-template>
+            </mwl-calendar-month-view>
+            <p-button
+              severity="secondary"
+              class="h-full flex flex-grow-0 justify-content-center"
+              [text]="true"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+              ><i class="pi pi-arrow-right"></i>
+            </p-button>
+          </div>
+          @if (!isCurrentMonth()) {
+            <p-button
+              class="w-full flex justify-content-center mt-5"
+              mwlCalendarToday
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+              >Dziś
+            </p-button>
+          }
+        }
+        @case (CalendarView.Week) {
+          <div class="p-3 w-full h-full">
+            <mwl-calendar-week-view
+              [viewDate]="viewDate"
+              [events]="events"
+              [refresh]="refresh"
+              [validateEventTimesChanged]="validateEventTimesChanged"
+              (eventTimesChanged)="eventTimesChanged($event)"
+            />
+          </div>
+        }
+        @case (CalendarView.Day) {
+          <div class="p-3 w-full h-full">
+            <mwl-calendar-day-view
+              [viewDate]="viewDate"
+              [events]="events"
+              [dayStartHour]="6"
+              [dayEndHour]="20"
+              [refresh]="refresh"
+              [validateEventTimesChanged]="validateEventTimesChanged"
+              (eventTimesChanged)="eventTimesChanged($event)"
+            />
+          </div>
+        }
       }
-      @case (CalendarView.Week) {
-        <mwl-calendar-week-view [viewDate]="viewDate" [events]="events" />
-      }
-      @case (CalendarView.Day) {
-        <mwl-calendar-day-view [viewDate]="viewDate" [events]="events" />
-      }
-    }
-    <div class="w-full flex gap-3 p-3">
-      <p-button
-        label="Poprzedni"
-        severity="secondary"
-        mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
-      >
-      </p-button>
-      <p-button label="Obecny miesiąc" mwlCalendarToday [(viewDate)]="viewDate"></p-button>
-      <p-button
-        label="Następny"
-        severity="secondary"
-        mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
-      >
-      </p-button>
     </div>
   </div>
 </main>

@@ -2,9 +2,18 @@
 @import 'primeflex/primeflex.css';
 
 $primary: #094af0;
+
+// Dark Text
 $text1: #000;
 $text2: #0000008e;
 $text3: #696c82;
+// Light text
+$wtext1: #fff;
+$wtext2: #c9cad9;
+$wtext3: #aaa8b5;
+
+$icons: #a5aab2;
+$section: #f3f5f7;
 
 * {
   box-sizing: border-box;
@@ -12,14 +21,20 @@ $text3: #696c82;
   margin: 0;
 }
 
+:root {
+  --p-button-primary-background: #000 !important;
+  --p-button-primary-border-color: #000 !important;
+  --p-button-padding-y: 4px !important;
+  --p-button-padding-x: 8px !important;
+
+  --p-button-secondary-background: #c8c8ce;
+  --p-button-secondary-border-color: #c8c8ce;
+}
+
 body {
   height: 100vh;
   width: 100%;
-  font-family: 'Roboto', 'Helvetica', sans-serif;
-}
-
-main {
-  padding: 1rem 2rem;
+  font-family: 'Poppins', 'Helvetica', sans-serif;
 }
 
 // TYPOGRAPHY
@@ -39,6 +54,18 @@ h2 {
 
 .text-3 {
   color: $text3;
+}
+
+.wtext-1 {
+  color: #fff;
+}
+
+.wtext-2 {
+  color: #ffffffcd;
+}
+
+.wtext-3 {
+  color: #ffffffa5;
 }
 
 // ICONS
@@ -64,4 +91,99 @@ h2 {
 // DIVIDER
 .divider {
   border: 1px solid $text3;
+}
+
+.breadcrumbs-icon {
+  color: $icons;
+}
+
+// SIDEBAR
+.p-panelmenu-panel {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.p-panelmenu-header-link {
+  padding: 4px 8px !important;
+}
+
+.p-panelmenu-header-label {
+  color: $wtext2 !important;
+}
+
+.p-panelmenu-panel:hover,
+.p-panelmenu-header-content:hover {
+  background-color: rgb(20, 20, 21) !important;
+  color: $wtext1 !important;
+}
+
+// CALENDAR
+
+.content-box {
+  background-color: $section;
+}
+
+.cal-month-view,
+.cal-week-view,
+.cal-day-view {
+  border-radius: 12px;
+  overflow: hidden;
+  border: none !important;
+}
+
+.cal-past,
+.cal-today,
+.cal-future {
+  display: none;
+}
+
+.cal-month-view .cal-day-cell {
+  transition: background 0.2s;
+}
+
+.cal-month-view .cal-day-cell {
+  background: $section !important;
+}
+
+.cal-month-view .cal-header {
+  background: $section !important;
+  text-transform: uppercase;
+  font-weight: 600 !important;
+  font-size: 0.8rem;
+}
+
+.cal-month-view .cal-day-number {
+  font-family: 'Poppins', Helvetica, sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: #2b2b33 !important;
+  margin: 1rem 0 0 1rem !important;
+}
+
+.cal-month-view .cal-today {
+  background: rgba($primary, 0.2) !important;
+  border: 1px solid rgba($primary, 0.6) !important;
+  color: $primary !important;
+}
+
+.cal-month-view .cal-today .cal-day-number {
+  color: $primary !important;
+}
+
+.cal-month-view .cal-out-month .cal-day-number {
+  opacity: 0.4 !important;
+}
+
+.cal-cell-top {
+  display: flex !important;
+  height: 14vh !important;
+  width: 9vw !important;
+}
+
+.cal-month-view .cal-header .cal-cell:hover,
+.cal-month-view .cal-header .cal-cell .cal-today .cal-weekend,
+.cal-month-view .cal-header .cal-cell .cal-today .cal-weekend:hover {
+  background: $section !important;
+  color: #2b2b33 !important;
+  border: none !important;
 }

@@ -1,0 +1,23 @@
+:host ::ng-deep .cal-month-view .cal-header .cal-cell,
+:host ::ng-deep .cal-week-view .cal-header .cal-cell {
+  font-family: 'Poppins', 'Helvetica', sans-serif;
+  font-weight: 400;
+}
+
+.active-weekday {
+  background-color: #000;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.weekend-cell-style {
+  background: rgba(#f54d4d, 0.1) !important;
+  border: 1px solid rgba(#f54d4d, 0.1) !important;
+}
+
+.disabled-month {
+  background-image: url("data:image/svg+xml,%3Csvg%20id%3D'stripes-svg'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'100%25'%20height%3D'100%25'%3E%3Cdefs%3E%3Cpattern%20id%3D'svg-stripes-pattern-48073'%20patternTransform%3D'rotate(45)'%20width%3D'100%25'%20height%3D'11'%20x%3D'0'%20y%3D'0'%20patternUnits%3D'userSpaceOnUse'%3E%3Cg%3E%3Crect%20x%3D'0'%20y%3D'0'%20width%3D'100%25'%20height%3D'4'%20fill%3D'rgba(0%2C%200%2C%200%2C%201)'%3E%3C%2Frect%3E%3Crect%20x%3D'0'%20y%3D'4'%20width%3D'100%25'%20height%3D'7'%20fill%3D'rgba(255%2C%20255%2C%20255%2C%200)'%3E%3C%2Frect%3E%3C%2Fg%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20x%3D'0'%20y%3D'0'%20width%3D'100%25'%20height%3D'100%25'%20fill%3D'url(%23svg-stripes-pattern-48073)'%3E%3C%2Frect%3E%3C%2Fsvg%3E") !important;
+  opacity: 0.2;
+  z-index: 1;
+}

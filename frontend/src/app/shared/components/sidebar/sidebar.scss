@@ -1,3 +1,12 @@
 :host .p-panelmenu-panel {
   border: none;
 }
+
+.p-panelmenu-panel {
+  background-color: transparent;
+  border: none;
+}
+
+.p-panelmenu-header-link.p-panelmenu-header-label {
+  color: #ffffffcd;
+}
