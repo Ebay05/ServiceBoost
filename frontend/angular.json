@@ -25,8 +25,8 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/assets", "src/favicon.ico"],
             "styles": ["src/styles.scss", "node_modules/angular-calendar/css/angular-calendar.css"],
-            "baseHref": "/",
-            "deployUrl": "/"
+            "baseHref": "/app/",
+            "deployUrl": "/app/"
           },
           "configurations": {
             "production": {
