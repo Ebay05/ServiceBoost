@@ -7,14 +7,12 @@ import { Button } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-access',
   imports: [FloatLabelModule, InputTextModule, FormsModule, ToggleSwitchModule, Button, RouterLink],
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
+  templateUrl: './access.html',
+  styleUrl: './access.scss',
 })
-export class Login {
-  rememberUser: boolean = false;
-
+export class Access {
   today = new Date();
   year = this.today.getFullYear();
 }

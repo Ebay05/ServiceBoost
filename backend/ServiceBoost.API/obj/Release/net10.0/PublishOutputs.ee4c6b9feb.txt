@@ -1,0 +1,9 @@
+D:\Projekty\ServiceBoost\backend\ServiceBoost.API\publish\ServiceBoost.API.exe
+D:\Projekty\ServiceBoost\backend\ServiceBoost.API\publish\appsettings.Development.json
+D:\Projekty\ServiceBoost\backend\ServiceBoost.API\publish\appsettings.json
+D:\Projekty\ServiceBoost\backend\ServiceBoost.API\publish\ServiceBoost.API.dll
+D:\Projekty\ServiceBoost\backend\ServiceBoost.API\publish\ServiceBoost.API.deps.json
+D:\Projekty\ServiceBoost\backend\ServiceBoost.API\publish\ServiceBoost.API.runtimeconfig.json
+D:\Projekty\ServiceBoost\backend\ServiceBoost.API\publish\ServiceBoost.API.pdb
+D:\Projekty\ServiceBoost\backend\ServiceBoost.API\publish\Microsoft.AspNetCore.OpenApi.dll
+D:\Projekty\ServiceBoost\backend\ServiceBoost.API\publish\Microsoft.OpenApi.dll

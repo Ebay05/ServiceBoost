@@ -2,7 +2,7 @@
   <div
     class="h-full left md:w-5 hidden lg:p-5 p-3 md:flex flex-column justify-content-end"
     style="
-      background: url('assets/images/login.png');
+      background: url('assets/images/access.png');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -24,25 +24,14 @@
     <div
       class="lg:w-6 w-12 p-5 flex flex-grow-1 gap-3 flex-column justify-content-center align-items-center"
     >
-      <h1 class="font-semibold text-center">Witaj ponownie!</h1>
-      <p-floatlabel class="w-full">
-        <input id="username" pInputText class="w-full" />
-        <label for="username">Nazwa użytkownika</label>
-      </p-floatlabel>
+      <h1 class="font-semibold text-center">Uzyskaj dostęp</h1>
 
-      <p-floatlabel class="w-full">
-        <input id="password" pInputText class="w-full" />
-        <label for="password">Hasło</label>
-      </p-floatlabel>
-
-      <div class="w-full">
-        <a href="odzyskiwanie-hasla" class="text-red-500 font-medium">Zapomniałem hasła</a>
-        <p class="font-normal flex align-items-center gap-2 py-3">
-          Zapamiętaj mnie <p-toggleswitch [(ngModel)]="rememberUser" />
-        </p>
+      <div class="p-3 border-1 border-solid border-round-2xl">
+        Dostęp do ServiceBoost jest ograniczony. W celu otrzymania danych logowania skontaktuj się z
+        administratorem swojej organizacji.
       </div>
 
-      <p-button label="Zaloguj" styleClass="px-6"></p-button>
+      <p-button label="Wróć do logowania" styleClass="px-6" routerLink="/"></p-button>
     </div>
     <footer class="w-full p-3 flex flex-grow-0 justify-content-center">
       <p class="text-xs text-center">ServiceBoost Copyrights {{ year }} © All rights reserved.</p>

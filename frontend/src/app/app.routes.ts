@@ -8,6 +8,22 @@ export const routes: Routes = [
   },
 
   {
+    path: 'logowanie',
+    loadComponent: () => import('./features/login/login').then((m) => m.Login),
+  },
+
+  {
+    path: 'dostep',
+    loadComponent: () => import('./features/access/access').then((m) => m.Access),
+  },
+
+  {
+    path: 'odzyskiwanie-hasla',
+    loadComponent: () =>
+      import('./features/change-password/change-password').then((m) => m.ChangePassword),
+  },
+
+  {
     path: 'app',
     component: Sidebar,
     children: [
