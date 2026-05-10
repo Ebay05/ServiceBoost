@@ -1,5 +1,5 @@
 {
   "buildCommand": "npm install && npm run build",
-  "outputDirectory": "dist/service-boost",
+  "outputDirectory": "dist/serviceboost",
   "framework": "angular"
 }
