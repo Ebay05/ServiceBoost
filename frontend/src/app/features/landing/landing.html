@@ -1,3 +1,121 @@
-<div class="flex flex-column justify-content-center align-items-center h-screen w-full">
-  <p-button label="Aplikacja" routerLink="/app/dashboard" />
-</div>
+<main class="flex flex-column align-items-center w-full">
+  <div
+    id="hero"
+    class="sec flex lg:gap-6 md:h-screen md:justify-content-center h-auto lg:flex-row flex-column"
+  >
+    @for (i of heroContent; track $index) {
+      <div class="left lg:w-6 w-12 flex gap-3 flex-column justify-content-center">
+        <span class="uppercase text-base font-semibold text-bluegray-400"> {{ i.subheader }}</span>
+        <h1 class="lg:text-6xl text-4xl font-semibold">{{ i.title }}</h1>
+        <p class="text-lg">
+          {{ i.description }}
+        </p>
+        <div class="flex gap-3 mt-3">
+          <p-button label="{{ i.btnTextPri }}" routerLink="{{ i.btnLinkPri }}" />
+          <p-button
+            severity="secondary"
+            label="{{ i.btnTextSec }}"
+            routerLink="{{ i.btnLinkSec }}"
+          />
+        </div>
+      </div>
+      <img
+        [src]="'assets/images/' + i.image"
+        alt="Zdjęcie poglądowe dashboardu aplikacji ServiceBoost"
+        class="lg:w-6 lg:block hidden contain"
+      />
+    }
+  </div>
+
+  <!-- FEATURES -->
+  <div id="features" class="sec flex gap-6 lg:flex-row flex-column">
+    @for (i of featuresContent; track $index) {
+      <img
+        [src]="'assets/images/' + i.image"
+        alt="Zdjęcie poglądowe aplikacji na telefonie"
+        class="lg:w-5 md:w-8 w-12 contain border-round-3xl"
+      />
+      <div class="right lg:w-7 w-12 flex gap-3 flex-column justify-content-center">
+        <span class="uppercase text-base font-semibold text-bluegray-400">{{ i.subheader }}</span>
+        <h2 class="lg:text-6xl text-4xl font-semibold">{{ i.title }}</h2>
+        <p class="text-lg">{{ i.description }}</p>
+
+        @for (list of i.list; track $index) {
+          <div class="font-semibold">> {{ list }}</div>
+        }
+
+        <div class="flex gap-3 mt-3">
+          <p-button label="{{ i.btnTextPri }}" routerLink="{{ i.btnLinkPri }}" />
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- CHARTS -->
+  <div id="charts" class="flex gap-6 sec lg:flex-row flex-column">
+    @for (i of chartsContent; track $index) {
+      <div class="right lg:w-7 w-12 flex gap-3 flex-column justify-content-center">
+        <span class="uppercase text-base font-semibold text-bluegray-400">{{ i.subheader }}</span>
+        <h2 class="lg:text-6xl text-4xl font-semibold">
+          {{ i.title }}
+        </h2>
+        <p class="text-lg">
+          {{ i.description }}
+        </p>
+
+        @for (acc of i.accordion; track $index) {
+          <p-accordion value="0">
+            <p-accordion-panel value="{{ $index }}">
+              <p-accordion-header>{{ acc.title }}</p-accordion-header>
+              <p-accordion-content>
+                <p class="m-0">{{ acc.content }}</p>
+              </p-accordion-content>
+            </p-accordion-panel>
+          </p-accordion>
+        }
+      </div>
+
+      <img
+        [src]="'assets/images/' + i.image"
+        alt="Zdjęcie poglądowe wykresów"
+        class="lg:w-5 w-12 contain border-round-3xl"
+      />
+    }
+  </div>
+
+  <!-- FAQ -->
+  <div id="faq" class="flex gap-6 sec lg:flex-row flex-column">
+    @for (i of faqContent; track $index) {
+      <div class="right lg:w-9 w-12 flex gap-3 flex-column justify-content-center">
+        <span class="uppercase text-base font-semibold text-bluegray-400">{{ i.subheader }}</span>
+        <h2 class="lg:text-6xl text-4xl font-semibold">
+          {{ i.title }}
+        </h2>
+        <p class="text-lg">
+          {{ i.description }}
+        </p>
+
+        @for (acc of i.accordion; track $index) {
+          <p-accordion value="0">
+            <p-accordion-panel value="{{ $index }}">
+              <p-accordion-header>{{ acc.title }}</p-accordion-header>
+              <p-accordion-content>
+                <p class="m-0">{{ acc.content }}</p>
+              </p-accordion-content>
+            </p-accordion-panel>
+          </p-accordion>
+        }
+      </div>
+
+      <div
+        class="lg:w-3 w-12 md:h-30rem h-15rem bg-gray-200 border-round-3xl flex flex-column justify-content-center align-items-center gap-3"
+      >
+        <span>Nie znalazłeś pomocy?</span>
+        <p-button>Skontaktuj się z nami</p-button>
+      </div>
+    }
+  </div>
+  <footer class="w-full p-3 bg-gray-200 flex justify-content-center">
+    <p class="text-xs">ServiceBoost Copyrights {{ year }} © All rights reserved.</p>
+  </footer>
+</main>

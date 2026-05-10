@@ -24,34 +24,15 @@
         <div class="divider"></div>
 
         <!-- AMOUNT OF ORDERS -->
-        <div>
-          <span class="text-lg text-2 font-semibold block mb-2">{{ totalOrders }} zleceń</span>
-          <div class="flex flex-wrap gap-3">
-            <span class="text-2 text-lg font-medium">
-              <i class="pi pi-circle-fill text-green"></i>
-              przyjęte:
-              {{ orders.accepted }}
+        <p-meterGroup [value]="meterValues">
+          <ng-template pTemplate="label" let-item>
+            <span class="flex items-center gap-2">
+              <i class="pi pi-circle-fill" [class]="item.color"></i>
+              {{ item.label }}
             </span>
-
-            <span class="text-2 text-lg font-medium">
-              <i class="pi pi-circle-fill text-orange"></i>
-              w realizacji:
-              {{ orders.ongoing }}
-            </span>
-
-            <span class="text-2 text-lg font-medium">
-              <i class="pi pi-circle-fill text-red"></i>
-              opóźnione:
-              {{ orders.delayed }}
-            </span>
-          </div>
-        </div>
+          </ng-template>
+        </p-meterGroup>
       </div>
-    </div>
-
-    <!--  CALENDAR -->
-    <div class="calendar w-3">
-      <h3>Terminarz</h3>
     </div>
   </div>
 </main>

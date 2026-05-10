@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MeterGroup } from 'primeng/metergroup';
 
 interface Orders {
   accepted: number;
@@ -8,7 +9,7 @@ interface Orders {
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [MeterGroup],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
@@ -21,5 +22,20 @@ export class Dashboard {
 
   get totalOrders() {
     return this.orders.accepted + this.orders.ongoing + this.orders.delayed;
+  }
+
+  get meterValues() {
+    if (!this.orders) return [];
+
+    const { accepted, ongoing, delayed } = this.orders;
+    const total = accepted + ongoing + delayed;
+
+    if (total === 0) return [];
+
+    return [
+      { label: `Przyjęte (${accepted})`, value: (accepted / total) * 100, color: 'text-green' },
+      { label: `W realizacji (${ongoing})`, value: (ongoing / total) * 100, color: 'text-orange' },
+      { label: `Opóźnione (${delayed})`, value: (delayed / total) * 100, color: 'text-red' },
+    ];
   }
 }

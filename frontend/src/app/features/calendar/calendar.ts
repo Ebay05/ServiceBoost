@@ -26,10 +26,13 @@ import { FormsModule } from '@angular/forms';
 
 import { registerLocaleData } from '@angular/common';
 import localePl from '@angular/common/locales/pl';
-import { TitleCasePipe } from '@angular/common';
 
 import { DateFormatter } from './date-formatter/date-formatter';
-import { pl } from 'date-fns/locale';
+import { DialogModule } from 'primeng/dialog';
+import { InputText } from 'primeng/inputtext';
+import { SelectButton } from 'primeng/selectbutton';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputTextModule } from 'primeng/inputtext';
 
 registerLocaleData(localePl);
 
@@ -47,7 +50,9 @@ interface Event {
   selector: 'app-calendar',
   standalone: true,
   imports: [
-    SelectButtonModule,
+    SelectButton,
+    FloatLabelModule,
+    InputTextModule,
     FormsModule,
     CalendarModule,
     CalendarNextViewDirective,
@@ -56,6 +61,8 @@ interface Event {
     CalendarDayViewComponent,
     Button,
     CalendarDatePipe,
+    DialogModule,
+    InputText,
   ],
   providers: [
     provideCalendar({
@@ -88,6 +95,7 @@ export class Calendar {
     return String(date.getDate()).padStart(2, '0');
   }
 
+  // My events or from database
   myEvents: Event[] = [
     {
       date: '2026-05-01',
@@ -129,9 +137,17 @@ export class Calendar {
     },
   ];
 
+  // Creating events
   events: CalendarEvent[] = this.myEvents.map((e) => ({
     start: new Date(`${e.date}T${e.hour ?? '00:00'}`),
     title: e.description,
+    meta: {
+      client: e.client,
+      type: e.type,
+      vehicle: e.vehicle,
+      hour: e.hour,
+      age: e.age,
+    },
   }));
 
   viewOptions = [
@@ -156,6 +172,42 @@ export class Calendar {
     );
   }
 
+  isCurrentWeek(): boolean {
+    const today = new Date();
+    const view = new Date(this.viewDate);
+
+    const getMonday = (date: Date) => {
+      const d = new Date(date);
+      const day = d.getDay();
+      const diff = (day === 0 ? -6 : 1) - day;
+      d.setHours(0, 0, 0, 0);
+      return d;
+    };
+
+    const mondayToday = getMonday(today);
+    const mondayView = getMonday(view);
+
+    return mondayToday.getTime() === mondayView.getTime();
+  }
+
+  // Week View Header
+
+  getWeekDays(): { name: string; date: Date }[] {
+    const start = new Date(this.viewDate);
+    const day = start.getDay();
+    const diff = (day === 0 ? -6 : 1) - day; // poniedziałek jako start
+    start.setDate(start.getDate() + diff);
+
+    return Array.from({ length: 7 }).map((_, i) => {
+      const d = new Date(start);
+      d.setDate(start.getDate() + i);
+      return {
+        name: this.weekdays[i],
+        date: d,
+      };
+    });
+  }
+
   refresh = new Subject<void>();
 
   validateEventTimesChanged = (
@@ -171,14 +223,12 @@ export class Calendar {
     }
 
     delete event.cssClass;
-    // don't allow dragging or resizing events to different days
     const sameDay = isSameDay(newStart, newEnd);
 
     if (!sameDay) {
       return false;
     }
 
-    // don't allow dragging events to the same times as other events
     const overlappingEvent = this.events.find((otherEvent) => {
       return (
         otherEvent !== event &&
@@ -208,4 +258,19 @@ export class Calendar {
       this.refresh.next();
     }
   }
+
+  // Adding order form
+
+  visible = false;
+
+  showDialog() {
+    this.visible = true;
+  }
+
+  optionsClient = [
+    { label: 'Nowy', value: 0 },
+    { label: 'Z bazy', value: 1 },
+  ];
+
+  valueClient = 0;
 }

@@ -19,18 +19,75 @@
       </div>
 
       <div class="flex justify-content-end" style="width: 30%">
-        <p-button><i class="pi pi-plus"></i>Dodaj Zlecenie</p-button>
+        <p-button (onClick)="showDialog()"><i class="pi pi-plus"></i>Dodaj Zlecenie</p-button>
       </div>
+
+      <p-dialog
+        header="Dodawanie zlecenia"
+        [modal]="true"
+        [(visible)]="visible"
+        class="flex flex-column"
+      >
+        <div class="flex flex-column">
+          <span class="p-text-secondary block mb-5">Wprowadź dane zlecenia.</span>
+          <div class="flex flex-column align-items-center gap-3 mb-3">
+            <p-floatLabel class="p-float-label w-full">
+              <input pInputText id="order-number" />
+              <label for="order-number">Numer zlecenia</label>
+            </p-floatLabel>
+
+            <div id="client-data" class="flex flex-column gap-3">
+              <p-selectbutton
+                [options]="optionsClient"
+                [(ngModel)]="valueClient"
+                optionLabel="label"
+                optionValue="value"
+                aria-labelledby="basic"
+              />
+
+              @if (valueClient === 0) {
+                <div class="w-full flex gap-3">
+                  <p-floatLabel>
+                    <input pInputText id="firstname" />
+                    <label for="firstname">Imię</label>
+                  </p-floatLabel>
+
+                  <p-floatLabel>
+                    <input pInputText id="lastname" />
+                    <label for="lastname">Nazwisko</label>
+                  </p-floatLabel>
+                </div>
+
+                <div class="w-full flex gap-3">
+                  <p-floatLabel>
+                    <input pInputText id="email" />
+                    <label for="email">E-mail</label>
+                  </p-floatLabel>
+
+                  <p-floatLabel>
+                    <input pInputText id="vehicle-id" />
+                    <label for="vehicle-id">Id pojazdu</label>
+                  </p-floatLabel>
+                </div>
+              } @else {
+                <p>Tu będzie wybierany klient z bazy.</p>
+              }
+            </div>
+          </div>
+        </div>
+      </p-dialog>
     </div>
-    <!-- @if (view == CalendarView.Month) {
-      <div class="w-full flex align-items-center mt-5 text-center">
+    @if (view == CalendarView.Month) {
+      <!-- <div class="w-full flex align-items-center mt-5 text-center">
         @for (day of weekdays; track $index) {
           <p class="py-1 flex-1 px-3 font-medium" [class.active-weekday]="$index === activeWeekday">
             {{ day | titlecase }}
           </p>
         }
       </div>
-    } -->
+
+      -->
+    }
   </div>
 
   <div class="flex flex-column overflow-y-auto flex-1 content-box py-3 px-5">
@@ -93,10 +150,30 @@
                   [class.disabled-month]="!day.inMonth"
                   [class.weekend-cell-style]="day.isWeekend"
                 >
-                  <div class="cal-cell-top">
+                  <div class="cal-cell-top flex flex-column justify-content-between w-full h-full">
                     <span class="cal-day-number">
                       {{ formatDay(day.date) }}
                     </span>
+
+                    <div class="flex flex-column justify-content-center p-1">
+                      @for (event of day.events; track $index) {
+                        <div class="flex align-items-center gap-1">
+                          @if (event.meta?.type === 'work') {
+                            <i
+                              class="pi pi-circle-fill text-blue-500 flex-grow-0"
+                              style="font-size: 0.4rem"
+                            ></i>
+                          } @else if (event.meta?.type === 'birthday') {
+                            <i
+                              class="pi pi-circle-fill text-red-500 flex-grow-0"
+                              style="font-size: 0.4rem"
+                            ></i>
+                          }
+                          <p class="text-xs font-medium flex-grow-1">{{ event.title }}</p>
+                          <p class="text-xs flex-grow-1">{{ event.meta?.hour }}</p>
+                        </div>
+                      }
+                    </div>
                   </div>
                 </div>
               </ng-template>
@@ -124,15 +201,57 @@
         }
         @case (CalendarView.Week) {
           <div class="p-3 w-full h-full">
+            <div class="flex gap-3">
+              <p-button
+                severity="secondary"
+                mwlCalendarPreviousView
+                class="h-full flex flex-grow-0 justify-content-center"
+                [view]="view"
+                [text]="true"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenMonthViewDay()"
+                ><i class="pi pi-arrow-left"></i
+              ></p-button>
+
+              @if (!isCurrentWeek()) {
+                <p-button mwlCalendarToday [(viewDate)]="viewDate" class="flex-1">Dziś</p-button>
+              }
+
+              <p-button
+                severity="secondary"
+                class="h-full flex flex-grow-0 justify-content-center"
+                [text]="true"
+                mwlCalendarNextView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenMonthViewDay()"
+                ><i class="pi pi-arrow-right"></i
+              ></p-button>
+            </div>
+
+            <div class="w-full flex align-items-center mt-5 text-center">
+              @for (day of getWeekDays(); track $index) {
+                <p
+                  class="py-1 flex-1 px-3 font-medium flex flex-column"
+                  [class.active-weekday]="$index === activeWeekday"
+                >
+                  {{ day.name }} {{ day.date.getDate() }}
+                </p>
+              }
+            </div>
+
+            <!-- WeekView -->
             <mwl-calendar-week-view
               [viewDate]="viewDate"
               [events]="events"
               [refresh]="refresh"
               [validateEventTimesChanged]="validateEventTimesChanged"
               (eventTimesChanged)="eventTimesChanged($event)"
-            />
+            >
+            </mwl-calendar-week-view>
           </div>
         }
+
         @case (CalendarView.Day) {
           <div class="p-3 w-full h-full">
             <mwl-calendar-day-view
