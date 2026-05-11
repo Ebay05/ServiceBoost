@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm install && npm run build",
-  "outputDirectory": "dist/serviceboost",
+  "outputDirectory": "dist/serviceboost/browser",
   "framework": "angular",
   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
