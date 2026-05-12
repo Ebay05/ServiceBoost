@@ -18,6 +18,10 @@ import {
 } from 'angular-calendar';
 import { isSameDay } from 'date-fns';
 import { Subject } from 'rxjs';
+import { TextareaModule } from 'primeng/textarea';
+import { DatePickerModule } from 'primeng/datepicker';
+import { DatePipe } from '@angular/common';
+import dayjs from 'dayjs';
 
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { Button } from 'primeng/button';
@@ -63,6 +67,9 @@ interface Event {
     CalendarDatePipe,
     DialogModule,
     InputText,
+    DatePickerModule,
+    SelectButtonModule,
+    TextareaModule,
   ],
   providers: [
     provideCalendar({
@@ -272,5 +279,13 @@ export class Calendar {
     { label: 'Z bazy', value: 1 },
   ];
 
+  // Adding order data
   valueClient = 0;
+  valueVehicle = 0;
+  note!: string;
+
+  today = new Date();
+  date_of_admission = this.today;
+
+  deadline: Date | undefined;
 }

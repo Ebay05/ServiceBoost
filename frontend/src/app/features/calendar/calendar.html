@@ -36,7 +36,34 @@
               <label for="order-number">Numer zlecenia</label>
             </p-floatLabel>
 
+            <!-- DATES -->
+            <div class="w-full flex gap-3">
+              <p-floatlabel>
+                <label for="date_of_admission" class="font-bold block mb-2">
+                 </label
+                >
+                <p-datepicker
+                  [(ngModel)]="date_of_admission"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  inputId="date_of_admission"
+                />
+              </p-floatlabel>
+
+              <p-floatlabel>
+                <label for="date_of_admission" class="font-bold block mb-2"> </label>
+                <p-datepicker
+                  [(ngModel)]="deadline"
+                  [iconDisplay]="'input'"
+                  [showIcon]="true"
+                  inputId="date_of_admission"
+                />
+              </p-floatlabel>
+            </div>
+
+            <!-- CLIENT DATA -->
             <div id="client-data" class="flex flex-column gap-3">
+              <h5 class="uppercase">Dane klienta</h5>
               <p-selectbutton
                 [options]="optionsClient"
                 [(ngModel)]="valueClient"
@@ -63,15 +90,79 @@
                     <input pInputText id="email" />
                     <label for="email">E-mail</label>
                   </p-floatLabel>
-
                   <p-floatLabel>
-                    <input pInputText id="vehicle-id" />
-                    <label for="vehicle-id">Id pojazdu</label>
+                    <input pInputText id="phone" />
+                    <label for="phone">Telefon</label>
                   </p-floatLabel>
                 </div>
               } @else {
                 <p>Tu będzie wybierany klient z bazy.</p>
               }
+            </div>
+
+            <!-- VEHICLE DATA -->
+            <div id="client-data" class="flex flex-column gap-3">
+              <h5 class="uppercase">Dane Pojazdu</h5>
+              <p-selectbutton
+                [options]="optionsClient"
+                [(ngModel)]="valueClient"
+                optionLabel="label"
+                optionValue="value"
+                aria-labelledby="basic"
+              />
+
+              @if (valueVehicle === 0) {
+                <div class="w-full flex gap-3">
+                  <p-floatLabel>
+                    <input pInputText id="brand" />
+                    <label for="brand">Marka</label>
+                  </p-floatLabel>
+
+                  <p-floatLabel>
+                    <input pInputText id="model" />
+                    <label for="model">Model</label>
+                  </p-floatLabel>
+                </div>
+
+                <div class="w-full flex gap-3">
+                  <p-floatLabel>
+                    <input pInputText id="production-year" />
+                    <label for="production-year">Rok produkcji</label>
+                  </p-floatLabel>
+
+                  <p-floatLabel>
+                    <input pInputText id="vin" />
+                    <label for="vin">VIN</label>
+                  </p-floatLabel>
+                </div>
+
+                <div class="w-full flex gap-3">
+                  <p-floatLabel>
+                    <input pInputText id="fuel-type" />
+                    <label for="fuel-type">Rodzaj Paliwa</label>
+                  </p-floatLabel>
+                </div>
+
+                <div class="w-full flex gap-3">
+                  <p-floatLabel class="w-full">
+                    <textarea
+                      id="note"
+                      rows="5"
+                      pTextarea
+                      class="w-full"
+                      [(ngModel)]="note"
+                    ></textarea>
+                    <label for="note">Rodzaj Paliwa</label>
+                  </p-floatLabel>
+                </div>
+              } @else {
+                <p>Tu będzie wybierany pojazd z bazy.</p>
+              }
+            </div>
+
+            <div class="flex gap-3">
+              <p-button label="Anuluj" severity="secondary"></p-button>
+              <p-button label="Zapisz"></p-button>
             </div>
           </div>
         </div>
