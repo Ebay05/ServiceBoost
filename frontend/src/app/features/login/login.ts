@@ -5,6 +5,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { Button } from 'primeng/button';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,4 +19,21 @@ export class Login {
 
   today = new Date();
   year = this.today.getFullYear();
+
+  email = '';
+  password = '';
+
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+  ) {}
+
+  async login() {
+    try {
+      await this.auth.signIn(this.email, this.password);
+      this.router.navigate(['/app/dashboard']);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }

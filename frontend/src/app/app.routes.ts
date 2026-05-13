@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Sidebar } from './shared/components/sidebar/sidebar';
+import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,7 @@ export const routes: Routes = [
   {
     path: 'app',
     component: Sidebar,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',

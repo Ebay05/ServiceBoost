@@ -7,51 +7,50 @@
       <div class="flex justify-content-end" style="width: 30%">
         <p-button (onClick)="showDialog()"><i class="pi pi-plus"></i>Dodaj Kosztorys</p-button>
       </div>
-
-      <p-dialog
-        header="Dodawanie zlecenia"
-        [modal]="true"
-        [(visible)]="visible"
-        class="flex flex-column"
-      >
-        <div class="flex flex-column">
-          <span class="p-text-secondary block mb-5">Wprowadź dane zlecenia.</span>
-          <div class="flex flex-column align-items-center gap-3 mb-3">
-            <!-- DATES -->
-            <div class="w-full flex gap-3">
-              <p-floatlabel>
-                <label for="date_of_admission" class="font-bold block mb-2"> </label>
-                <p-datepicker
-                  [(ngModel)]="creation_date"
-                  [iconDisplay]="'input'"
-                  [showIcon]="true"
-                  inputId="date_of_admission"
-                  disabled=""
-                />
-              </p-floatlabel>
-            </div>
-
-            <!-- CLIENT DATA -->
-            <div id="client-data" class="flex flex-column gap-3">
-              <p-select
-                [options]="employees"
-                [(ngModel)]="selectedEmployee"
-                optionLabel="name"
-                placeholder="Wybierz mechanika"
-                class="w-full md:w-56"
+    </div>
+    <p-dialog
+      header="Dodawanie zlecenia"
+      [modal]="true"
+      [(visible)]="visible"
+      class="flex flex-column"
+    >
+      <div class="flex flex-column">
+        <span class="p-text-secondary block mb-5">Wprowadź dane zlecenia.</span>
+        <div class="flex flex-column align-items-center gap-3 mb-3">
+          <!-- DATES -->
+          <div class="w-full flex gap-3">
+            <p-floatlabel>
+              <label for="date_of_admission" class="font-bold block mb-2"> </label>
+              <p-datepicker
+                [(ngModel)]="creation_date"
+                [iconDisplay]="'input'"
+                [showIcon]="true"
+                inputId="date_of_admission"
+                disabled=""
               />
-            </div>
+            </p-floatlabel>
+          </div>
 
-            <div id="client-data" class="flex flex-column gap-3"></div>
+          <!-- CLIENT DATA -->
+          <div id="client-data" class="flex flex-column gap-3">
+            <p-select
+              [options]="employees"
+              [(ngModel)]="selectedEmployee"
+              optionLabel="name"
+              placeholder="Wybierz mechanika"
+              class="w-full md:w-56"
+            />
+          </div>
 
-            <div class="flex gap-3">
-              <p-button label="Anuluj" severity="secondary"></p-button>
-              <p-button label="Zapisz"></p-button>
-            </div>
+          <div id="client-data" class="flex flex-column gap-3"></div>
+
+          <div class="flex gap-3">
+            <p-button label="Anuluj" severity="secondary"></p-button>
+            <p-button label="Zapisz"></p-button>
           </div>
         </div>
-      </p-dialog>
-    </div>
+      </div>
+    </p-dialog>
   </div>
 
   <div class="flex flex-column overflow-y-auto flex-1 content-box py-3 px-5">Test</div>

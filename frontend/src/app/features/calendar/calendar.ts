@@ -20,8 +20,6 @@ import { isSameDay } from 'date-fns';
 import { Subject } from 'rxjs';
 import { TextareaModule } from 'primeng/textarea';
 import { DatePickerModule } from 'primeng/datepicker';
-import { DatePipe } from '@angular/common';
-import dayjs from 'dayjs';
 
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { Button } from 'primeng/button';
@@ -33,9 +31,9 @@ import localePl from '@angular/common/locales/pl';
 
 import { DateFormatter } from './date-formatter/date-formatter';
 import { DialogModule } from 'primeng/dialog';
-import { InputText } from 'primeng/inputtext';
 import { SelectButton } from 'primeng/selectbutton';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputTextModule } from 'primeng/inputtext';
 
 registerLocaleData(localePl);
@@ -50,6 +48,24 @@ interface Event {
   age?: number;
 }
 
+interface orderData {
+  orderId: number;
+  createdAt: Date;
+  status: string;
+  employee: string;
+
+  clientFirstname: string;
+  clientLastname: string;
+  clientEmail: string;
+  clientPhone: string;
+
+  vehicleBrand: string;
+  vehicleModel: string;
+  vehicleProductionYear: number;
+  vehicleFuelType: string;
+  vehicleNote: string;
+}
+
 @Component({
   selector: 'app-calendar',
   standalone: true,
@@ -57,6 +73,7 @@ interface Event {
     SelectButton,
     FloatLabelModule,
     InputTextModule,
+    IftaLabelModule,
     FormsModule,
     CalendarModule,
     CalendarNextViewDirective,
@@ -66,7 +83,6 @@ interface Event {
     Button,
     CalendarDatePipe,
     DialogModule,
-    InputText,
     DatePickerModule,
     SelectButtonModule,
     TextareaModule,
@@ -274,7 +290,7 @@ export class Calendar {
     this.visible = true;
   }
 
-  optionsClient = [
+  recordExist = [
     { label: 'Nowy', value: 0 },
     { label: 'Z bazy', value: 1 },
   ];
@@ -288,4 +304,24 @@ export class Calendar {
   date_of_admission = this.today;
 
   deadline: Date | undefined;
+
+  orders: orderData[] = [
+    {
+      orderId: 1,
+      createdAt: this.today,
+      status: 'Przyjęte',
+      employee: 'Marian Paździoch',
+
+      clientFirstname: 'Elżbieta',
+      clientLastname: 'Trębicka',
+      clientEmail: 'etrebicka89@gmail.com',
+      clientPhone: '506 432 231',
+
+      vehicleBrand: 'Audi',
+      vehicleModel: 'A7',
+      vehicleProductionYear: 2020,
+      vehicleFuelType: 'Benzyna',
+      vehicleNote: 'Jakaś mało ważna notatka',
+    },
+  ];
 }

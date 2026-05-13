@@ -26,12 +26,12 @@
     >
       <h1 class="font-semibold text-center">Witaj ponownie!</h1>
       <p-floatlabel class="w-full">
-        <input id="username" pInputText class="w-full" />
+        <input [(ngModel)]="email" id="username" pInputText class="w-full" type="email" />
         <label for="username">Nazwa użytkownika</label>
       </p-floatlabel>
 
       <p-floatlabel class="w-full">
-        <input id="password" pInputText class="w-full" />
+        <input [(ngModel)]="password" id="password" pInputText class="w-full" type="password" />
         <label for="password">Hasło</label>
       </p-floatlabel>
 
@@ -42,7 +42,7 @@
         </p>
       </div>
 
-      <p-button label="Zaloguj" styleClass="px-6"></p-button>
+      <p-button label="Zaloguj" styleClass="px-6" (click)="login()"></p-button>
     </div>
     <footer class="w-full p-3 flex flex-grow-0 justify-content-center">
       <p class="text-xs text-center">ServiceBoost Copyrights {{ year }} © All rights reserved.</p>

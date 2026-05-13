@@ -26,46 +26,39 @@
         header="Dodawanie zlecenia"
         [modal]="true"
         [(visible)]="visible"
-        class="flex flex-column"
+        class="flex flex-column max-w-20rem"
       >
         <div class="flex flex-column">
-          <span class="p-text-secondary block mb-5">Wprowadź dane zlecenia.</span>
           <div class="flex flex-column align-items-center gap-3 mb-3">
-            <p-floatLabel class="p-float-label w-full">
-              <input pInputText id="order-number" />
-              <label for="order-number">Numer zlecenia</label>
-            </p-floatLabel>
-
-            <!-- DATES -->
             <div class="w-full flex gap-3">
-              <p-floatlabel>
-                <label for="date_of_admission" class="font-bold block mb-2">
-                 </label
-                >
-                <p-datepicker
-                  [(ngModel)]="date_of_admission"
-                  [iconDisplay]="'input'"
-                  [showIcon]="true"
-                  inputId="date_of_admission"
-                />
-              </p-floatlabel>
+              <p-iftalabel class="w-6 p-float-label">
+                <input pInputText id="order-number" [disabled]="true" />
+                <label for="order-number" class="capitalize">ID zlecenia</label>
+              </p-iftalabel>
 
-              <p-floatlabel>
-                <label for="date_of_admission" class="font-bold block mb-2"> </label>
-                <p-datepicker
-                  [(ngModel)]="deadline"
-                  [iconDisplay]="'input'"
-                  [showIcon]="true"
-                  inputId="date_of_admission"
-                />
-              </p-floatlabel>
+              <p-iftalabel class="w-6 p-float-label">
+                <input pInputText id="admission-date" [disabled]="true" />
+                <label for="admission-date" class="capitalize">Data utworzenia</label>
+              </p-iftalabel>
+            </div>
+
+            <div class="w-full flex gap-3">
+              <p-iftalabel class="w-6 p-float-label">
+                <input pInputText id="status" [disabled]="true" />
+                <label for="status" class="capitalize">Status</label>
+              </p-iftalabel>
+
+              <p-iftalabel class="w-6 p-float-label">
+                <input pInputText id="order-number" [disabled]="true" />
+                <label for="order-number" class="capitalize">Data utworzenia</label>
+              </p-iftalabel>
             </div>
 
             <!-- CLIENT DATA -->
-            <div id="client-data" class="flex flex-column gap-3">
+            <div id="client-data" class="w-full flex flex-column gap-3">
               <h5 class="uppercase">Dane klienta</h5>
               <p-selectbutton
-                [options]="optionsClient"
+                [options]="recordExist"
                 [(ngModel)]="valueClient"
                 optionLabel="label"
                 optionValue="value"
@@ -73,27 +66,30 @@
               />
 
               @if (valueClient === 0) {
-                <div class="w-full flex gap-3">
-                  <p-floatLabel>
-                    <input pInputText id="firstname" />
-                    <label for="firstname">Imię</label>
-                  </p-floatLabel>
+                <div class="w-full flex flex-column gap-3">
+                  <div class="w-full flex gap-3">
+                    <p-iftalabel class="w-6 p-float-label">
+                      <input pInputText id="client-firstname" />
+                      <label for="client-firstname" class="capitalize">Imię</label>
+                    </p-iftalabel>
 
-                  <p-floatLabel>
-                    <input pInputText id="lastname" />
-                    <label for="lastname">Nazwisko</label>
-                  </p-floatLabel>
-                </div>
+                    <p-iftalabel class="w-6 p-float-label">
+                      <input pInputText id="client-lastname" />
+                      <label for="client-lastname" class="capitalize">Nazwisko</label>
+                    </p-iftalabel>
+                  </div>
 
-                <div class="w-full flex gap-3">
-                  <p-floatLabel>
-                    <input pInputText id="email" />
-                    <label for="email">E-mail</label>
-                  </p-floatLabel>
-                  <p-floatLabel>
-                    <input pInputText id="phone" />
-                    <label for="phone">Telefon</label>
-                  </p-floatLabel>
+                  <div class="w-full flex gap-3">
+                    <p-iftalabel class="w-6 p-float-label">
+                      <input pInputText id="client-email" />
+                      <label for="client-email" class="capitalize">Email</label>
+                    </p-iftalabel>
+
+                    <p-iftalabel class="w-6 p-float-label">
+                      <input pInputText id="client-phone" />
+                      <label for="client-phone" class="capitalize">Telefon</label>
+                    </p-iftalabel>
+                  </div>
                 </div>
               } @else {
                 <p>Tu będzie wybierany klient z bazy.</p>
@@ -101,11 +97,11 @@
             </div>
 
             <!-- VEHICLE DATA -->
-            <div id="client-data" class="flex flex-column gap-3">
+            <div id="vehicle-data" class="w-full flex flex-column gap-3">
               <h5 class="uppercase">Dane Pojazdu</h5>
               <p-selectbutton
-                [options]="optionsClient"
-                [(ngModel)]="valueClient"
+                [options]="recordExist"
+                [(ngModel)]="valueVehicle"
                 optionLabel="label"
                 optionValue="value"
                 aria-labelledby="basic"
@@ -113,47 +109,47 @@
 
               @if (valueVehicle === 0) {
                 <div class="w-full flex gap-3">
-                  <p-floatLabel>
-                    <input pInputText id="brand" />
-                    <label for="brand">Marka</label>
-                  </p-floatLabel>
+                  <p-iftalabel>
+                    <input pInputText id="vehicle-brand" />
+                    <label for="vehicle-brand">Marka</label>
+                  </p-iftalabel>
 
-                  <p-floatLabel>
-                    <input pInputText id="model" />
-                    <label for="model">Model</label>
-                  </p-floatLabel>
+                  <p-iftalabel>
+                    <input pInputText id="vehicle-model" />
+                    <label for="vehicle-model">Model</label>
+                  </p-iftalabel>
                 </div>
 
                 <div class="w-full flex gap-3">
-                  <p-floatLabel>
-                    <input pInputText id="production-year" />
-                    <label for="production-year">Rok produkcji</label>
-                  </p-floatLabel>
+                  <p-iftalabel>
+                    <input pInputText id="vehicle-production-year" />
+                    <label for="vehicle-production-year">Rok produkcji</label>
+                  </p-iftalabel>
 
-                  <p-floatLabel>
-                    <input pInputText id="vin" />
-                    <label for="vin">VIN</label>
-                  </p-floatLabel>
+                  <p-iftalabel>
+                    <input pInputText id="vehicle-vin" />
+                    <label for="vehicle-vin">VIN</label>
+                  </p-iftalabel>
                 </div>
 
                 <div class="w-full flex gap-3">
-                  <p-floatLabel>
-                    <input pInputText id="fuel-type" />
-                    <label for="fuel-type">Rodzaj Paliwa</label>
-                  </p-floatLabel>
+                  <p-iftalabel>
+                    <input pInputText id="vehicle-fuel-type" />
+                    <label for="vehicle-fuel-type">Rodzaj Paliwa</label>
+                  </p-iftalabel>
                 </div>
 
                 <div class="w-full flex gap-3">
-                  <p-floatLabel class="w-full">
+                  <p-iftalabel class="w-full">
                     <textarea
-                      id="note"
+                      id="vehicle-note"
                       rows="5"
                       pTextarea
-                      class="w-full"
+                      fluid
                       [(ngModel)]="note"
                     ></textarea>
-                    <label for="note">Rodzaj Paliwa</label>
-                  </p-floatLabel>
+                    <label for="vehicle-note">Notatka</label>
+                  </p-iftalabel>
                 </div>
               } @else {
                 <p>Tu będzie wybierany pojazd z bazy.</p>
@@ -161,8 +157,8 @@
             </div>
 
             <div class="flex gap-3">
-              <p-button label="Anuluj" severity="secondary"></p-button>
-              <p-button label="Zapisz"></p-button>
+              <p-button class="w-full" label="Anuluj" severity="secondary"></p-button>
+              <p-button class="w-full" label="Zapisz"></p-button>
             </div>
           </div>
         </div>
